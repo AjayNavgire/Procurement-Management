@@ -9,13 +9,6 @@ pipeline {
             }
         }
         
-        stage('Install Dependencies') {
-            steps {
-                // Install Node.js dependencies
-                sh 'npm install'
-            }
-        }
-        
         stage('Build') {
             steps {
                 // Run the build (if you have a build script)
@@ -32,9 +25,28 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Start the application
-                sh 'node backend/server.js'
+                script {
+                    // Check if PM2 is installed, and install it if not
+                    sh 'if ! command -v pm2 &> /dev/null; then npm install -g pm2; fi'
+
+                    // Stop any existing PM2 process for the application (if running)
+                    sh 'pm2 delete my-app || true'
+
+                    // Start the application using PM2
+                    sh 'pm2 start backend/server.js --name my-app'
+                }
             }
+        }
+    }
+
+    post {
+        success {
+            // Notify success
+            echo 'Build and deployment succeeded!'
+        }
+        failure {
+            // Notify failure
+            echo 'Build or deployment failed!'
         }
     }
 }
