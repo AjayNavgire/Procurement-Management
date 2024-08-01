@@ -14,7 +14,7 @@ pipeline {
                 dir('backend') {
                     script {
                         // Check if PM2 is installed, and install it if not
-                        sh 'if ! command -v pm2 &> /dev/null; then npm install -g pm2; fi'
+                        sh 'if ! command -v pm2 &> /dev/null; then sudo npm install -g pm2; fi'
 
                         // Stop any existing PM2 process for the application (if running)
                         sh 'pm2 delete my-app || true'
