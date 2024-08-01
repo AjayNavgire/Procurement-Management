@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the repository
-                git 'https://github.com/AjayNavgire/Procurement-Management.git'
+                // Checkout the repository from a specific branch
+                git branch: 'main', url: 'https://github.com/AjayNavgire/Procurement-Management.git'
             }
         }
         
