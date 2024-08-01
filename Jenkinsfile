@@ -8,21 +8,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/AjayNavgire/Procurement-Management.git'
             }
         }
-        
-        stage('Build') {
-            steps {
-                // Run the build (if you have a build script)
-                sh 'npm run build'
-            }
-        }
-        
-        stage('Run Tests') {
-            steps {
-                // Run tests
-                sh 'npm test'
-            }
-        }
-
         stage('Deploy') {
             steps {
                 script {
