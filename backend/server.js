@@ -20,7 +20,7 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 });
 
-// Connecting to database
+// Connecting to database 
 connectDatabase();
 
 const server = app.listen(process.env.PORT, () => {
